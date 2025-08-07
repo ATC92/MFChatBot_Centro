@@ -3,8 +3,11 @@ const path = require('path');
 const mime = require('mime-types');
 const qrcode = require('qrcode-terminal');
 const cron = require('node-cron');
+const express = require('express');
 const { Client, LocalAuth, MessageMedia } = require('whatsapp-web.js');
 
+
+const app = express();
 const userStates = {};
 let botActivo = false;
 
@@ -16,6 +19,10 @@ const client = new Client({
         args: ['--no-sandbox', '--disable-setuid-sandbox']
     }
 });
+
+// Middleware para manejar el cuerpo de las solicitudes
+app.get('/', (req, res) => res.send('Bot activo'));
+app.listen(process.env.PORT || 3000, () => console.log('Servidor escuchando'));
 
 /// Imagenes constantes.
 const menuPath = path.join(__dirname, 'img', 'menu', 'menu.jpg');
