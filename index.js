@@ -157,14 +157,14 @@ client.on('message', async msg => {
     // Si el usuario solicita la ubicación
     // Aquí puedes agregar la lógica para enviar la ubicación
     if (msg.body.toString() === '3') {
-        client.sendMessage(msg.from, 
+        await client.sendMessage(msg.from, 
             '📍 *Nuestra ubicación es:*\n\n' +
             '*Marquesitas Factory*\n' +
             '📌 Blvd Benito Juárez, Playas de Rosarito\n' +
             '🔍 Cerca del Restaurante El Nido\n\n' +
+            '*¡Google Maps!*\n\n🌐 https://maps.app.goo.gl/55z1CpKXMQLG9pYS6\n\n' +
             '🗺️ *¡Ven a visitarnos!*');
-
-        client.sendMessage(msg.from, '*¡Google Maps!*\n\n🌐 https://maps.app.goo.gl/55z1CpKXMQLG9pYS6');
+        await client.sendMessage(msg.from, '*Desea regresar al menú principal?*\n [0] 📋 *Ver más opciones*');
     }
 
     // Si el usuario solicita información sobre precios
