@@ -2,8 +2,11 @@ const fs = require('fs');
 const path = require('path');
 const mime = require('mime-types');
 const qrcode = require('qrcode-terminal');
+const cron = require('node-cron');
 const { Client, LocalAuth, MessageMedia } = require('whatsapp-web.js');
+
 const userStates = {};
+let botActivo = false;
 
 // Guardar sesión automáticamente en carpeta "session"
 const client = new Client({
@@ -18,7 +21,6 @@ const client = new Client({
 const menuPath = path.join(__dirname, 'img', 'menu', 'menu.jpg');
 const menuPDFPath = path.join(__dirname, 'docs', 'menu.pdf');
 const hoariosPDFPath = path.join(__dirname, 'docs', 'horarios.pdf');
-
 
 /// Constants mensajes.
 const welcomeMessage = `
@@ -50,6 +52,34 @@ Notas: Puede especificar alguna nota adicional aquí.
 ────────────────
 *¡Gracias por tu pedido!*
 `;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+// Programar una tarea para activar el bot automáticamente a las 8:00 AM
+// Lunes/Jueves/Viernes activar a las 16:00
+cron.schedule('0 16 * * 1,4,5', () => {
+  botActivo = true;
+  console.log('✅ Bot activado (Lun/Jue/Vie 16:00)');
+});
+
+// Lunes/Jueves/Viernes desactivar a las 21:00
+cron.schedule('0 21 * * 1,4,5', () => {
+  botActivo = false;
+  console.log('🛑 Bot desactivado (Lun/Jue/Vie 21:00)');
+});
+
+// Sábado/Domingo activar a las 14:00
+cron.schedule('0 14 * * 6,0', () => {
+  botActivo = true;
+  console.log('✅ Bot activado (Sáb/Dom 14:00)');
+});
+
+// Sábado/Domingo desactivar a las 21:00
+cron.schedule('0 21 * * 6,0', () => {
+  botActivo = false;
+  console.log('🛑 Bot desactivado (Sáb/Dom 21:00)');
+});
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // Funciones de eventos del cliente de WhatsApp
 function guardarPedido(userId, pedidoTexto) {
@@ -76,8 +106,6 @@ ${pedidoTexto}
     });
 }
 
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 client.on('qr', qr => {
     qrcode.generate(qr, { small: true });
@@ -89,6 +117,14 @@ client.on('ready', () => {
 });
 
 client.on('message', async msg => {
+    if (!botActivo) {
+        await client.sendMessage(msg.from,
+          '📌 Lo sentimos, nuestro horario de atención es:\n' +
+          'Lun/Jue/Vie de 4:00PM a 9:00PM\n' +
+          'Sáb/Dom de 2:00PM a 9:00PM\n\n' +
+          'Responde con un "Hola" cuando volvamos a estar en servicio . ¡Gracias por tu comprensión!');
+        return;
+    }
     console.log(`📨 Mensaje de ${msg.from}: ${msg.body}`);
 
     // Si el usuario escribe "hola" o "0", enviamos el mensaje de bienvenida
