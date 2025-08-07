@@ -1,0 +1,36 @@
+
+Usuario: 5216631051552@c.us
+---
+Fecha y hora: 8/3/2025, 12:40:47 PM
+---
+Pedido:
+Quiero 
+2 marquesitas
+
+1 con Nutella y fresa
+1 con maní y plátano
+----------------------------
+
+Usuario: 5216647849586@c.us
+---
+Fecha y hora: 8/3/2025, 12:50:30 PM
+---
+Pedido:
+Cantidad 3
+Marquesita 1: Nutella y queso de bola
+Marquesita 2: mermelada de chabacano y Philadelphia 
+Marquesita 3: Nutella y nuez
+----------------------------
+
+Usuario: 5216631051552@c.us
+---
+Fecha y hora: 8/3/2025, 1:38:44 PM
+---
+Pedido:
+Alan Torres
+
+Cantidad: 3
+
+Nutella, fresa y platano.
+Nutella, philadelphia, oreo y queso de bola.
+----------------------------

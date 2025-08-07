@@ -1,0 +1,59 @@
+2025/08/07-01:24:11.668 272b Reusing MANIFEST /home/atc/Documents/MFChatBot_Centro/session/session/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/08/07-01:24:11.670 272b Recovering log #983
+2025/08/07-01:24:11.724 272b Reusing old log /home/atc/Documents/MFChatBot_Centro/session/session/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000983.log 
+2025/08/07-01:24:13.634 2726 Level-0 table #1000: started
+2025/08/07-01:24:13.762 2726 Level-0 table #1000: 347228 bytes OK
+2025/08/07-01:24:13.769 2726 Delete type=0 #983
+2025/08/07-01:24:13.770 2726 Manual compaction at level-0 from '\x00t\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00u\x00\x00\x00' @ 0 : 0; will stop at '\x00t\x00\x00\x05' @ 3948701 : 1
+2025/08/07-01:24:13.770 2726 Compacting 1@0 + 1@1 files
+2025/08/07-01:24:13.901 2726 Generated table #1001@0: 6257 keys, 135573 bytes
+2025/08/07-01:24:14.041 2726 Generated table #1002@0: 14459 keys, 296377 bytes
+2025/08/07-01:24:14.041 2726 Compacted 1@0 + 1@1 files => 431950 bytes
+2025/08/07-01:24:14.047 2726 compacted to: files[ 0 2 21 0 0 0 0 ]
+2025/08/07-01:24:14.047 2726 Delete type=2 #1000
+2025/08/07-01:24:14.048 2726 Manual compaction at level-0 from '\x00t\x00\x00\x05' @ 3948701 : 1 .. '\x00u\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/08/07-01:24:16.068 2738 Compacting 1@1 + 10@2 files
+2025/08/07-01:24:16.323 2738 Generated table #1003@1: 86708 keys, 2235605 bytes
+2025/08/07-01:24:16.535 2738 Generated table #1004@1: 44119 keys, 2275672 bytes
+2025/08/07-01:24:16.710 2738 Generated table #1005@1: 10647 keys, 2146076 bytes
+2025/08/07-01:24:16.858 2738 Generated table #1006@1: 264 keys, 2113302 bytes
+2025/08/07-01:24:17.008 2738 Generated table #1007@1: 284 keys, 2110385 bytes
+2025/08/07-01:24:17.146 2738 Generated table #1008@1: 263 keys, 2114789 bytes
+2025/08/07-01:24:17.387 2738 Generated table #1009@1: 96039 keys, 2243309 bytes
+2025/08/07-01:24:17.645 2738 Generated table #1010@1: 111387 keys, 2265648 bytes
+2025/08/07-01:24:17.892 2738 Generated table #1011@1: 111190 keys, 2264225 bytes
+2025/08/07-01:24:18.287 2738 Generated table #1012@1: 111252 keys, 2264166 bytes
+2025/08/07-01:24:18.294 2738 Generated table #1013@1: 1459 keys, 30034 bytes
+2025/08/07-01:24:18.295 2738 Compacted 1@1 + 10@2 files => 22063211 bytes
+2025/08/07-01:24:18.304 2738 compacted to: files[ 0 1 22 0 0 0 0 ]
+2025/08/07-01:24:18.305 2738 Delete type=2 #995
+2025/08/07-01:24:18.305 2738 Delete type=2 #992
+2025/08/07-01:24:18.305 2738 Delete type=2 #988
+2025/08/07-01:24:18.305 2738 Delete type=2 #1001
+2025/08/07-01:24:18.305 2738 Delete type=2 #993
+2025/08/07-01:24:18.305 2738 Delete type=2 #991
+2025/08/07-01:24:18.305 2738 Delete type=2 #989
+2025/08/07-01:24:18.306 2738 Delete type=2 #987
+2025/08/07-01:24:18.306 2738 Delete type=2 #990
+2025/08/07-01:24:18.306 2738 Delete type=2 #994
+2025/08/07-01:24:18.306 2738 Delete type=2 #986
+2025/08/07-01:24:18.306 2738 Delete type=2 #996
+2025/08/07-01:24:22.230 2737 Compacting 1@1 + 10@2 files
+2025/08/07-01:24:22.555 2737 Generated table #1014@1: 111611 keys, 2266387 bytes
+2025/08/07-01:24:22.833 2737 Generated table #1015@1: 111195 keys, 2264013 bytes
+2025/08/07-01:24:23.123 2737 Generated table #1016@1: 111587 keys, 2265796 bytes
+2025/08/07-01:24:23.382 2737 Generated table #1017@1: 111204 keys, 2265258 bytes
+2025/08/07-01:24:23.571 2737 Generated table #1018@1: 48892 keys, 1000261 bytes
+2025/08/07-01:24:23.571 2737 Compacted 1@1 + 10@2 files => 10061715 bytes
+2025/08/07-01:24:23.577 2737 compacted to: files[ 0 0 17 0 0 0 0 ]
+2025/08/07-01:24:23.578 2737 Delete type=2 #895
+2025/08/07-01:24:23.578 2737 Delete type=2 #879
+2025/08/07-01:24:23.578 2737 Delete type=2 #940
+2025/08/07-01:24:23.578 2737 Delete type=2 #924
+2025/08/07-01:24:23.578 2737 Delete type=2 #972
+2025/08/07-01:24:23.578 2737 Delete type=2 #908
+2025/08/07-01:24:23.578 2737 Delete type=2 #882
+2025/08/07-01:24:23.578 2737 Delete type=2 #881
+2025/08/07-01:24:23.578 2737 Delete type=2 #880
+2025/08/07-01:24:23.578 2737 Delete type=2 #956
+2025/08/07-01:24:23.578 2737 Delete type=2 #1002
