@@ -9,6 +9,9 @@ import pkg from 'whatsapp-web.js';
 // import { Client, MessageMedia } from 'whatsapp-web.js';
 const { Client, MessageMedia } = pkg;
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
 const userStates = {};
 let botActivo = false;
@@ -18,10 +21,7 @@ let botActivo = false;
 // -- Mongoose y esquema para sesión --
 
 /// Base de datos MongoDB
-mongoose.connect(process.env.MONGO_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(() => console.log('✅ Conectado a MongoDB'))
+mongoose.connect(process.env.MONGO_URL).then(() => console.log('✅ Conectado a MongoDB'))
   .catch(err => console.error('❌ Error MongoDB:', err));
 
 const sessionSchema = new mongoose.Schema({
