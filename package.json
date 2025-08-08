@@ -6,8 +6,11 @@
     "start": "nodemon index.js"
   },
   "dependencies": {
+    "@whiskeysockets/baileys": "^6.7.18",
+    "baileys": "^6.7.18",
     "express": "^5.1.0",
     "mime-types": "^3.0.1",
+    "mongoose": "^8.17.1",
     "node-cron": "^4.2.1",
     "puppeteer": "^24.16.0",
     "qrcode-terminal": "^0.12.0",

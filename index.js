@@ -1,24 +1,82 @@
-const fs = require('fs');
-const path = require('path');
-const mime = require('mime-types');
-const qrcode = require('qrcode-terminal');
-const cron = require('node-cron');
-const express = require('express');
-const { Client, LocalAuth, MessageMedia } = require('whatsapp-web.js');
-
+import mongoose from 'mongoose';
+import fs from 'fs';
+import path from 'path';
+import mime from 'mime-types';
+import qrcode from 'qrcode-terminal';
+import cron from 'node-cron';
+import express from 'express';
+import { Client, MessageMedia } from 'whatsapp-web.js';
 
 const app = express();
 const userStates = {};
 let botActivo = false;
 
-// Guardar sesión automáticamente en carpeta "session"
-const client = new Client({
-    authStrategy: new LocalAuth({ dataPath: './session' }),
-    puppeteer: {
-        headless: true, // no abrir navegador
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
-    }
+/// mongodb+srv://mfcentro:<mf2025>@cluster0.i6pwwrc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+// -- Mongoose y esquema para sesión --
+
+/// Base de datos MongoDB
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}).then(() => console.log('✅ Conectado a MongoDB'))
+  .catch(err => console.error('❌ Error MongoDB:', err));
+
+const sessionSchema = new mongoose.Schema({
+  _id: String,       // siempre usar ID fijo para guardar una única sesión
+  sessionData: Object
 });
+
+const SessionModel = mongoose.model('Session', sessionSchema);
+
+// Función para cargar sesión de la DB
+async function loadSession() {
+  const sessionDoc = await SessionModel.findById('whatsapp-session');
+  if (sessionDoc) {
+    console.log('🔄 Sesión cargada desde MongoDB');
+    return sessionDoc.sessionData;
+  }
+  return null;
+}
+
+// Función para guardar sesión en la DB
+async function saveSession(session) {
+  await SessionModel.findByIdAndUpdate(
+    'whatsapp-session',
+    { sessionData: session },
+    { upsert: true, new: true }
+  );
+  console.log('💾 Sesión guardada en MongoDB');
+}
+
+// Cargar sesión guardada para usarla en el cliente
+const sessionData = await loadSession();
+
+// Crear cliente WhatsApp con sesión cargada si existe
+const client = new Client({
+  session: sessionData || undefined,
+  puppeteer: {
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  },
+});
+//   authStrategy: new LocalAuth({
+//     clientId: 'bot-session',
+//     // Nota: LocalAuth por defecto guarda en filesystem, 
+//     // pero aquí usaremos esta sesión manualmente
+//     // y guardaremos la sesión en DB al actualizarse
+//     // para que Railway no pierda sesión.
+//   }),
+
+
+// Guardar sesión automáticamente en carpeta "session"
+// const client = new Client({
+//     authStrategy: new LocalAuth({ dataPath: './session' }),
+//     puppeteer: {
+//         headless: true, // no abrir navegador
+//         args: ['--no-sandbox', '--disable-setuid-sandbox']
+//     }
+// });
 
 // Middleware para manejar el cuerpo de las solicitudes
 app.get('/', (req, res) => res.send('Bot activo'));
@@ -63,7 +121,7 @@ Notas: Puede especificar alguna nota adicional aquí.
 //////////////////////////////////////////////////////////////////////////////////////////////////
 // Programar una tarea para activar el bot automáticamente a las 8:00 AM
 // Lunes/Jueves/Viernes activar a las 16:00
-cron.schedule('0 16 * * 1,4,5', () => {
+cron.schedule('0 13 * * 1,4,5', () => {
   botActivo = true;
   console.log('✅ Bot activado (Lun/Jue/Vie 16:00)');
 });
@@ -123,7 +181,18 @@ client.on('ready', () => {
     console.log('✅ ¡Bot conectado y listo!');
 });
 
+client.on('authenticated', async (session) => {
+    console.log('💾 Guardando sesión en DB...');
+    await saveSession(session);
+});
+
 client.on('message', async msg => {
+    // Ignorar mensajes de grupos
+    if (msg.from.endsWith('@g.us')) {
+        console.log(`Mensaje ignorado de grupo: ${msg.from}`);
+        return; // NO procesar mensajes de grupos
+    }
+    // Verificar si el bot está activo
     if (!botActivo) {
         await client.sendMessage(msg.from,
           '📌 Lo sentimos, nuestro horario de atención es:\n' +
