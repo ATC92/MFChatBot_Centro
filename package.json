@@ -2,8 +2,12 @@
   "name": "mi-bot-whatsapp",
   "version": "1.0.0",
   "main": "index.js",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "dependencies": {
     "@whiskeysockets/baileys": "^6.7.18",
