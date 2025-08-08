@@ -5,7 +5,9 @@ import mime from 'mime-types';
 import qrcode from 'qrcode-terminal';
 import cron from 'node-cron';
 import express from 'express';
-import { Client, MessageMedia } from 'whatsapp-web.js';
+import pkg from 'whatsapp-web.js';
+// import { Client, MessageMedia } from 'whatsapp-web.js';
+const { Client, MessageMedia } = pkg;
 
 const app = express();
 const userStates = {};
@@ -338,10 +340,5 @@ client.on('message', async msg => {
 
     }  
 });
-
-
-
-
-
 
 client.initialize();
