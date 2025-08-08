@@ -7,6 +7,7 @@ import qrcode from 'qrcode-terminal';
 import cron from 'node-cron';
 import express from 'express';
 import pkg from 'whatsapp-web.js';
+import 'dotenv/config';
 // import { Client, MessageMedia } from 'whatsapp-web.js';
 const { Client, MessageMedia } = pkg;
 
